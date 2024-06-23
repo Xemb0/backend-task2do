@@ -1,6 +1,7 @@
-const express = require('express');
-const Task = require('../models/task');
-const router = new express.Router();
+import express from 'express';
+import { Task } from '../models/task.js';
+
+const router = express.Router();
 
 // Create a new task
 router.post('/tasks', async (req, res) => {
@@ -40,7 +41,7 @@ router.get('/tasks/:id', async (req, res) => {
 // Update a task
 router.patch('/tasks/:id', async (req, res) => {
     const updates = Object.keys(req.body);
-    const allowedUpdates = ['title', 'description', 'dueDate', 'completed'];
+    const allowedUpdates = ['title', 'description', 'dueDate', 'completed','catagory'];
     const isValidOperation = updates.every(update => allowedUpdates.includes(update));
 
     if (!isValidOperation) {
@@ -74,4 +75,4 @@ router.delete('/tasks/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
